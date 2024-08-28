@@ -91,6 +91,15 @@ void Jogar(char matriz[3][3], int controle)
     DesenhaMatriz(matriz);
 }
 
+int Empate(char matriz[3][3], int controle)
+{
+
+    int result = 1;
+
+     if(result == 0) controle = 3;
+        return result;
+}
+
 int vencedor(char matriz[3][3])
 {
     int result = 1;
@@ -122,6 +131,9 @@ int vencedor(char matriz[3][3])
     if(matriz[0][2] == 'x' && matriz[1][1] == 'x' && matriz[2][0] == 'x'  ) result = 0;
     if(matriz[0][0] == 'x' && matriz[1][1] == 'x' && matriz[2][2] == 'x'  ) result = 0;
 
+
+
+
     return result;
 }
 
@@ -129,7 +141,7 @@ int main()
 {
 
     char matriz[3][3] = {'1','2','3','4','5','6','7','8','9'};
-    int controle = 1,game = 0;
+    int controle = 1,game = 0,draw[3][3];
     printf("\n\nCaso o jogador jogar em uma casa que o outro ja possui uma marcacao aquele perdera a vez.\n\nDigite 1  para confirmar ciencia:\n ");
     scanf("%d",&game);
 
@@ -139,13 +151,22 @@ int main()
         Jogar(matriz,controle);
         if(controle == 1) controle = 0; else controle = 1;
         game = vencedor(matriz);
+        for(int i =0;i<3;i++)for(int j =0; j<3;j++) if(matriz[i][j] == 'x' || matriz[i][j] == 'o') draw[i][j] = 1;
+         if(draw[0][0] == 1 && draw[0][1] == 1  && draw[0][2] == 1)
+            if(draw[1][0] == 1 && draw[1][1] == 1  && draw[1][2] == 1)
+                if(draw[2][0] == 1 && draw[2][1] == 1  && draw[2][2] == 1)
+                {
+                    game = 0;
+                    controle = 3;
+
+                }
+
+    for(int i =0; i< 3;i++)for(int j =0; j<3;j++)draw[i][j]=0;
+
 
     }
-    if(controle == 1) printf("\nO Player 2 e o vencedor!!!\n\n"); else printf("\nO Player 1 e o vencedor!!!\n\n");
-
-
-
-
+    if(controle == 1) printf("\nO Player 2 e o vencedor!!!\n\n"); else if(controle == 0) printf("\nO Player 1 e o vencedor!!!\n\n"); else if(controle ==3)
+    printf("\nEmpate!!!\n\n");
 
     return 0;
 }
