@@ -151,6 +151,7 @@ int main()
         Jogar(matriz,controle);
         if(controle == 1) controle = 0; else controle = 1;
         game = vencedor(matriz);
+        //verificação do empate
         for(int i =0;i<3;i++)for(int j =0; j<3;j++) if(matriz[i][j] == 'x' || matriz[i][j] == 'o') draw[i][j] = 1;
          if(draw[0][0] == 1 && draw[0][1] == 1  && draw[0][2] == 1)
             if(draw[1][0] == 1 && draw[1][1] == 1  && draw[1][2] == 1)
